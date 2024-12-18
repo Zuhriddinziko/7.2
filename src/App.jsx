@@ -9,6 +9,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ProtectedRouters from "./components/ProtectedRouters";
 
+import { action as RegisterAction } from "./pages/Register";
+import { action as LoginAction } from "./pages/Login";
+
 function App() {
   const user = false;
   const routes = createBrowserRouter([
@@ -29,10 +32,12 @@ function App() {
     {
       path: "/login",
       element: user ? <Navigate to="/" /> : <Login />,
+      action: LoginAction,
     },
     {
       path: "/register",
       element: user ? <Navigate to="/" /> : <Register />,
+      action: RegisterAction,
     },
   ]);
   return <RouterProvider router={routes} />;
