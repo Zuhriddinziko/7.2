@@ -6,9 +6,11 @@ import { useRegister } from "../hooks/useRegister";
 // action
 export const action = async ({ request }) => {
   const form = await request.formData();
-  const displayName = form.get("name");
+  const displayName = form.get("displayName");
   const email = form.get("email");
   const password = form.get("password");
+
+  // console.log(displayName, email, password);
   return { displayName, email, password };
 };
 
@@ -17,7 +19,15 @@ function Register() {
   const data = useActionData();
   useEffect(() => {
     if (data) {
-      registerWithEmailAndPassword(data.displayName, data.email, data.password);
+      if (data.displayName.length > 3 && data.password.length > 3) {
+        registerWithEmailAndPassword(
+          data.displayName,
+          data.email,
+          data.password
+        );
+      } else {
+        alert("ma'lumotlarni to'liq kiriting");
+      }
     }
   }, [data]);
   return (
@@ -46,6 +56,7 @@ function Register() {
           type="Password"
           label="Repaet password"
           placeholder="password"
+          name="password2"
         />
         <div className="mt-5">
           <button className=" btn btn-primary btn-block">Submit</button>
