@@ -1,12 +1,24 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase/config";
+import { useDispatch } from "react-redux";
+import { login } from "../app/features/userSlice";
+
+// uuid
+import { v4 as uuid } from "uuid";
+
 export function useRegister() {
+  const dispatch = useDispatch();
   const registerWithEmailAndPassword = (displayName, email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Signed up
+        await updateProfile(auth.currentUser, {
+          displayName: displayName,
+          photoURL:
+            "https://api.dicebear.com/9.x/adventurer/svg?seed=" + uuid(),
+        });
         const user = userCredential.user;
-        console.log(user);
+        dispatch(login(user));
       })
       .catch((error) => {
         const errorCode = error.code;

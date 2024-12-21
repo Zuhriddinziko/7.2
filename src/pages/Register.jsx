@@ -2,6 +2,8 @@ import { Form, Link, useActionData } from "react-router-dom";
 import FormInput from "../components/FormInput";
 import { useEffect } from "react";
 import { useRegister } from "../hooks/useRegister";
+import { toast } from "react-toastify";
+import ima from ".././assets/image.jpg";
 
 // action
 export const action = async ({ request }) => {
@@ -25,14 +27,26 @@ function Register() {
           data.email,
           data.password
         );
+        toast.isActive("Wow! you active");
       } else {
-        alert("ma'lumotlarni to'liq kiriting");
+        toast.error("ma'lumotlarni to'liq kiriting");
       }
     }
   }, [data]);
   return (
-    <div className="h-screen grid place-items-center w-full bg-gradient-to-r from-amber-100 via-lime-300 to-lime-600">
-      <Form method="post" className="max-w-96 mx-auto w-full">
+    <div
+      className="h-screen grid place-items-center w-full "
+      style={{
+        backgroundImage: `url(${ima})`,
+        height: "100vh",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <Form
+        method="post"
+        className="max-w-96 mx-auto w-full  bg-slate-200 p-6 rounded"
+      >
         <h2 className="text-4xl text-center mb-5 font-bold">Register</h2>
         <FormInput
           type="text"
