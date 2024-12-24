@@ -14,7 +14,7 @@ function Navbar() {
   return (
     <div className="flex flex-col w-[400px]  bg-stone-400 shadow-lg shadow-slate-600  text-slate-50 justify-between items-center">
       <div className="flex flex-col p-10">
-        <div className="avatar online">
+        <div>
           <Avatar user={user} />
         </div>
       </div>

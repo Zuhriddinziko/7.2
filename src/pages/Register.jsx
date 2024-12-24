@@ -1,6 +1,6 @@
 import { Form, Link, useActionData } from "react-router-dom";
 import FormInput from "../components/FormInput";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRegister } from "../hooks/useRegister";
 import { toast } from "react-toastify";
 import ima from ".././assets/image.jpg";
@@ -19,6 +19,29 @@ export const action = async ({ request }) => {
 function Register() {
   const { registerWithEmailAndPassword } = useRegister();
   const data = useActionData();
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+  const handleName = (e) => {
+    setName(e.target.value);
+  };
+  const hendle = () => {
+    return (
+      <>
+        {password !== confirmPassword
+          ? alert(`password not compatible again ${setConfirmPassword("")}`)
+          : toast.success(`Welcome ${name}`)}
+      </>
+    );
+  };
+
   useEffect(() => {
     if (data) {
       if (data.displayName.length > 3 && data.password.length > 3) {
@@ -53,6 +76,8 @@ function Register() {
           label="Display Name"
           placeholder="Name"
           name="displayName"
+          value={name}
+          onChange={handleName}
         />
         <FormInput
           type="email"
@@ -65,15 +90,22 @@ function Register() {
           label="Password"
           placeholder="password"
           name="password"
+          value={password}
+          onChange={handlePasswordChange}
         />
         <FormInput
           type="Password"
           label="Repaet password"
-          placeholder="password"
+          placeholder="password validation"
           name="password2"
+          value={confirmPassword}
+          onChange={handleConfirmPasswordChange}
         />
+
         <div className="mt-5">
-          <button className=" btn btn-primary btn-block">Submit</button>
+          <button onClick={hendle} className=" btn btn-primary btn-block">
+            Submit
+          </button>
         </div>
         <div className=" mt-3">
           <h3>

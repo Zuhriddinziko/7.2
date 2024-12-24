@@ -11,6 +11,7 @@ export function useLogin() {
     let res = await signInWithEmailAndPassword(auth, email, password);
     await setDoc(doc(db, "users", res.user.uid), {
       displayName: res.user.displayName,
+      photoURL: res.user.photoURL,
       id: res.user.uid,
       online: true,
     });

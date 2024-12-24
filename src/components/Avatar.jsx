@@ -1,8 +1,8 @@
 function Avatar({ user }) {
   return (
-    <div className="max-w-96 flex flex-col h-30">
-      <div className="w-[75px] h=[75px]">
-        <img src={user.photoURL} alt="avetar" />
+    <div className="max-w-96 flex flex-col h-56">
+      <div className="w-[75px] h=[75px] avatar online">
+        <img src={user.photoURL} alt="ASZS" />
       </div>
       <div className="w-auto h-30">
         <p>Hello, {user.displayName}</p>
