@@ -1,15 +1,22 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase/config";
+import { auth, db } from "../firebase/config";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { login } from "../app/features/userSlice";
+import { doc, setDoc } from "firebase/firestore";
 export function useLogin() {
-  const loginWithEmailAndPassword = (email, password) => {
+  const dispatch = useDispatch();
+  const loginWithEmailAndPassword = async (email, password, displayName) => {
     // console.log(email, password);
-    signInWithEmailAndPassword(auth, email, password)
-      .then((user) => {
-        console.log(user);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    let res = await signInWithEmailAndPassword(auth, email, password);
+    await setDoc(doc(db, "users", res.user.uid), {
+      displayName: res.user.displayName,
+      id: res.user.uid,
+      online: true,
+    });
+
+    toast.success(`Welcome! ${user.displayName}`);
+    dispatch("Tizimga kirildi:", login(user));
   };
 
   return { loginWithEmailAndPassword };

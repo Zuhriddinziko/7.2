@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/config";
 import { login, authReadyAct } from "./app/features/userSlice";
+import Craete from "./pages/Craete";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,10 @@ function App() {
         {
           index: true,
           element: <Home />,
+        },
+        {
+          path: "/craete",
+          element: <Craete />,
         },
       ],
     },
