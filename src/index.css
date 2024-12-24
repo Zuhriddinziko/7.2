@@ -4,6 +4,6 @@
 
 @layer components {
   .nov-item .active {
-    @apply bg-slate-50 w-60 block  rounded-l-3xl text-black;
+    @apply bg-slate-50 ml-10 w-[320px] block rounded-l-3xl text-green-800;
   }
 }

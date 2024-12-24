@@ -12,31 +12,32 @@ function Navbar() {
   const { loguot } = useLoguot();
   const { user } = useSelector((stote) => stote.user);
   return (
-    <div className="flex flex-col w-[400px]  bg-stone-400 shadow-lg shadow-slate-600  text-slate-50 justify-between items-center">
-      <div className="flex flex-col p-10">
-        <div>
+    <div className="flex flex-col w-[400px]  bg-stone-400 shadow-lg shadow-slate-600  text-slate-50 justify-between items-center ">
+      <div className="flex flex-col gap-16">
+        <div className="p-16">
           <Avatar user={user} />
         </div>
+        <div>
+          <ul className="pl-10 flex flex-col gap-3 text-xl font-bold">
+            <li className="nov-item">
+              <NavLink to={"/craete"}>
+                <span className="flex items-center gap-2 ml-5  pl-10 p-2">
+                  <ImHappy2 /> Create
+                </span>
+              </NavLink>
+            </li>
+            <li className="nov-item">
+              <NavLink to={"/"} className=" ">
+                <span className="flex items-center gap-2 ml-5  pl-10 p-2">
+                  <GrApps /> Home
+                </span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div>
-        <ul className="pl-10 flex flex-col gap-3 text-xl font-bold">
-          <li className="nov-item">
-            <NavLink to={"/craete"}>
-              <span className="flex items-center gap-2 pl-3 p-2">
-                <ImHappy2 /> Create
-              </span>
-            </NavLink>
-          </li>
-          <li className="nov-item">
-            <NavLink to={"/"} className=" ">
-              <span className="flex items-center gap-2 pl-3 p-2">
-                <GrApps /> Home
-              </span>
-            </NavLink>
-          </li>
-        </ul>
-      </div>
-      <div>
+
+      <div className="pb-9">
         <button onClick={loguot} className="btn btn-accent">
           <span className="flex items-center gap-2 pl-3 p-2">
             <CgMoveRight /> Logout
