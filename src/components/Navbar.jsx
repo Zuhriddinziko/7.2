@@ -28,7 +28,7 @@ function Navbar() {
             </li>
             <li className="nov-item">
               <NavLink to={"/"} className=" ">
-                <span className="flex items-center gap-2 ml-5  pl-10 p-2">
+                <span className="flex items-center gap-2 ml-5  pl-10 p-2              ">
                   <GrApps /> Home
                 </span>
               </NavLink>
@@ -38,8 +38,12 @@ function Navbar() {
       </div>
 
       <div className="pb-9">
-        <button onClick={loguot} className="btn btn-accent">
-          <span className="flex items-center gap-2 pl-3 p-2">
+        <button
+          onClick={loguot}
+          className="btn btn-accent hover:text-black bg-black text-white font-bold rounded-lg shadow-lg 
+           animate-pulseGlow transition-transform duration-300 hover:scale-105"
+        >
+          <span className="flex items-center gap-2 pl-3 p-2 ">
             <CgMoveRight /> Logout
           </span>
         </button>

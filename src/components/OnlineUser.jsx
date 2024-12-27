@@ -4,31 +4,34 @@ function OnlineUser() {
   const { document } = useCollektion("users");
 
   return (
-    <ul className="w-[400px] h-screen bg-stone-400 p-10 flex flex-col gap-2 shadow-lg shadow-slate-600">
-      {document &&
-        document.map((doc) => {
-          return (
-            <li
-              key={doc.id}
-              className="w-[280px] h-[60px] text-black flex items-center rounded-lg p-2  bg-slate-50  shadow-slate-600 shadow-lg "
-            >
-              <div className="flex items-center gap-3">
-                <div className="avatar online">
-                  <div className="mask mask-squircle h-12 w-12">
-                    <img
-                      src={doc.photoURL}
-                      alt="Avatar Tailwind CSS Component"
-                    />
+    <div className="w-[400px] h-screen bg-stone-400 p-10  shadow-lg shadow-slate-600">
+      <ul className="bg-stone-300 w-[320px]  p-3 rounded-md flex flex-col gap-2 max-h-full overflow-y-auto">
+        {document &&
+          document.map((doc) => {
+            return (
+              <li
+                key={doc.id}
+                className="cursor-pointer w-[280px] h-[60px] text-black flex items-center rounded-lg p-2  hover:text-white bg-slate-50 shadow-yellow-500  shadow-lg  hover:bg-red-700  font-bold 
+                animate-pulseGlow transition-all duration-300 hover:scale-105 "
+              >
+                <div className="flex items-center gap-3">
+                  <div className="avatar online">
+                    <div className="mask mask-squircle h-12 w-12">
+                      <img
+                        src={doc.photoURL}
+                        alt="Avatar Tailwind CSS Component"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="font-bold">{doc.displayName}</div>
                   </div>
                 </div>
-                <div>
-                  <div className="font-bold">{doc.displayName}</div>
-                </div>
-              </div>
-            </li>
-          );
-        })}
-    </ul>
+              </li>
+            );
+          })}
+      </ul>
+    </div>
   );
 }
 

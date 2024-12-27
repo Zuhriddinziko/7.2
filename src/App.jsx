@@ -12,6 +12,8 @@ import ProtectedRouters from "./components/ProtectedRouters";
 // actions
 import { action as RegisterAction } from "./pages/Register";
 import { action as LoginAction } from "./pages/Login";
+import { action as CraeteAction } from "./pages/Craete";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
@@ -39,6 +41,7 @@ function App() {
         {
           path: "/craete",
           element: <Craete />,
+          action: CraeteAction,
         },
       ],
     },
