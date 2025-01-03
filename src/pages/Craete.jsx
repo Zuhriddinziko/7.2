@@ -74,7 +74,7 @@ function Craete() {
             options={progectType}
             components={ani}
             isMulti
-            className="placeholder:font-black text-blue-500 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="placeholder:from-neutral-500 text-blue-500 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </label>
 
@@ -87,7 +87,7 @@ function Craete() {
             options={usersOptions}
             components={ani}
             isMulti
-            className="placeholder:font-black text-blue-500 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="placeholder:font-neutral-500 text-blue-500 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </label>
         <button

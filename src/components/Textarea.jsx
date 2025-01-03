@@ -5,7 +5,7 @@ function Textarea({ label, name }) {
         <span className="label-text-alt">{label}</span>
       </div>
       <textarea
-        className="textarea textarea-bordered text-blue-900 placeholder-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400 "
+        className="textarea textarea-bordered text-blue-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 "
         placeholder="Bio"
         name={name}
       ></textarea>
