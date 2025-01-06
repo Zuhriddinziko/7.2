@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRegister } from "../hooks/useRegister";
 import { toast } from "react-toastify";
 import ima from ".././assets/image.jpg";
+import { validateSignupOrLoginData } from "../utils";
 
 // action
 export const action = async ({ request }) => {
@@ -11,14 +12,21 @@ export const action = async ({ request }) => {
   const displayName = form.get("displayName");
   const email = form.get("email");
   const password = form.get("password");
+  const confirmPassword = form.get("password2");
 
   // console.log(displayName, email, password);
-  return { displayName, email, password };
+  return { displayName, email, password, confirmPassword };
 };
 
 function Register() {
+  const [error, setError] = useState({
+    displayName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const { registerWithEmailAndPassword } = useRegister();
-  const data = useActionData();
+  const singUpData = useActionData();
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -33,29 +41,40 @@ function Register() {
     setName(e.target.value);
   };
   const hendle = () => {
-    return (
-      <>
-        {password !== confirmPassword
-          ? alert(`password not compatible again ${setConfirmPassword("")}`)
-          : toast.success(`Welcome ${name}`)}
-      </>
-    );
+    if (error.displayName !== "") {
+      toast.error(error.displayName);
+    } else if (error.email !== "") {
+      toast.error(error.email);
+    } else if (error.password !== "") {
+      toast.error(error.password);
+    } else if (error.confirmPassword !== "") {
+      toast.error(error.displayName);
+    } else {
+      toast.isActive(`Walecome ${name}`);
+    }
   };
 
   useEffect(() => {
-    if (data) {
-      if (data.displayName.length > 3 && data.password.length > 3) {
+    if (singUpData) {
+      const { valid, errors } = validateSignupOrLoginData(singUpData, true);
+      if (valid) {
+        const { displayName, email, password, confirmPassword } = singUpData;
         registerWithEmailAndPassword(
-          data.displayName,
-          data.email,
-          data.password
+          displayName,
+          email,
+          password,
+          confirmPassword
         );
-        toast.isActive("Wow! you active");
+        toast.success(" Congratulations! You are with us.");
       } else {
-        toast.error("ma'lumotlarni to'liq kiriting");
+        setError((prev) => {
+          return { ...prev, ...errors };
+        });
+        toast.error(errors);
       }
     }
-  }, [data]);
+  }, [singUpData]);
+
   return (
     <div
       className="h-screen grid place-items-center w-full "
@@ -78,12 +97,17 @@ function Register() {
           name="displayName"
           value={name}
           onChange={handleName}
+          error={error.displayName && "input-error"}
+          errorText={error.displayName}
+          toast={error.displayName}
         />
         <FormInput
           type="email"
           label="Email"
           placeholder="Email"
           name="email"
+          error={error.email && "input-error"}
+          errorText={error.email}
         />
         <FormInput
           type="Password"
@@ -92,6 +116,8 @@ function Register() {
           name="password"
           value={password}
           onChange={handlePasswordChange}
+          error={error.password && "input-error"}
+          errorText={error.password}
         />
         <FormInput
           type="Password"
@@ -100,11 +126,16 @@ function Register() {
           name="password2"
           value={confirmPassword}
           onChange={handleConfirmPasswordChange}
+          error={error.confirmPassword && "input-error"}
+          errorText={error.confirmPassword}
         />
 
-        <div className="mt-5">
+        <div className="mt-5 flex flex-col gap-2">
           <button onClick={hendle} className=" btn btn-primary btn-block">
             Submit
+          </button>
+          <button type="button" className=" btn btn-secondary btn-block">
+            Google
           </button>
         </div>
         <div className=" mt-3">

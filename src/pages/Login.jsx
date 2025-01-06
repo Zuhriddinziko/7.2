@@ -3,6 +3,7 @@ import FormInput from "../components/FormInput";
 import { useEffect } from "react";
 import { useLogin } from "../hooks/useLogin";
 import ima from ".././assets/image.jpg";
+import { useSelector } from "react-redux";
 
 // action
 export const action = async ({ request }) => {
@@ -13,6 +14,7 @@ export const action = async ({ request }) => {
 };
 
 function Login() {
+  const { isPanding } = useSelector((store) => store.user);
   const { loginWithEmailAndPassword } = useLogin();
   const data = useActionData();
   useEffect(() => {
@@ -52,7 +54,14 @@ function Login() {
           name="password"
         />
         <div className="mt-5">
-          <button className=" btn btn-primary btn-block">Submit</button>
+          {!isPanding && (
+            <button className=" btn btn-primary btn-block">Submit</button>
+          )}
+          {isPanding && (
+            <button className=" btn btn-primary btn-block" disabled>
+              Submit
+            </button>
+          )}
         </div>
         <div className="mt-3">
           <h3>

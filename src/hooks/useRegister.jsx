@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase/config";
 import { useDispatch } from "react-redux";
-import { login } from "../app/features/userSlice";
+import { login, setIsPanding } from "../app/features/userSlice";
 
 // uuid
 import { v4 as uuid } from "uuid";
@@ -11,6 +11,7 @@ export function useRegister() {
   const dispatch = useDispatch();
   const registerWithEmailAndPassword = async (displayName, email, password) => {
     let res = await createUserWithEmailAndPassword(auth, email, password);
+    dispatch(setIsPanding(true));
 
     await updateProfile(auth.currentUser, {
       displayName: displayName,
@@ -24,6 +25,7 @@ export function useRegister() {
       online: true,
     });
     dispatch(login(user));
+    dispatch(setIsPanding(false));
   };
 
   return { registerWithEmailAndPassword };

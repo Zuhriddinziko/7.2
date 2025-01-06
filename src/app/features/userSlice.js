@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = { user: null, authReady: false };
+const initialState = { user: null, authReady: false, isPanding: false };
 
 const userSlice = createSlice({
   name: "user",
@@ -14,8 +14,11 @@ const userSlice = createSlice({
     authReadyAct: (state) => {
       state.authReady = true;
     },
+    setIsPanding: (state, { payload }) => {
+      state.isPanding = payload;
+    },
   },
 });
 
-export const { login, logout, authReadyAct } = userSlice.actions;
+export const { login, logout, authReadyAct, setIsPanding } = userSlice.actions;
 export default userSlice.reducer;

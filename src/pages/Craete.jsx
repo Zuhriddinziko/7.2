@@ -4,15 +4,15 @@ import Textarea from "../components/Textarea";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { useEffect, useState } from "react";
-import { Timestamp } from "firebase/firestore";
-import { serverTimestamp } from "firebase/firestore";
+import { Timestamp, serverTimestamp } from "firebase/firestore";
+import { useFirestore } from "../hooks/useFirestore";
 
-const ani = makeAnimated();
+const animationms = makeAnimated();
 export async function action({ request }) {
   const form = await request.formData();
   const name = form.get("name");
   const description = form.get("description");
-  const dueTo = form.get("dueTo");
+  const dueTo = Timestamp.fromDate(new Date(form.get("dueTo")));
   return { name, description, dueTo };
 }
 
@@ -30,9 +30,10 @@ const progectType = [
 ];
 
 function Craete() {
+  const { addDocument } = useFirestore();
   const userActionDate = useActionData();
-  const [selectus, setSelectus] = useState(null);
-  const [selecttuz, setSelecttuz] = useState(null);
+  const [selectus, setSelectus] = useState([]);
+  const [selecttuz, setSelecttuz] = useState([]);
 
   const userSelectUs = (user) => {
     setSelectus(user);
@@ -40,9 +41,15 @@ function Craete() {
   const userSelectTuzType = (type) => {
     setSelecttuz(type);
   };
+  console.log(userActionDate);
   useEffect(() => {
     if (userActionDate) {
-      console.log(userActionDate, selecttuz, selectus);
+      addDocument("Projects", {
+        ...userActionDate,
+        selecttuz,
+        selectus,
+        createAd: serverTimestamp(new Date()),
+      });
     }
   }, [userActionDate]);
   return (
@@ -72,8 +79,7 @@ function Craete() {
           <Select
             onChange={userSelectTuzType}
             options={progectType}
-            components={ani}
-            isMulti
+            components={animationms}
             className="placeholder:from-neutral-500 text-blue-500 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </label>
@@ -85,7 +91,7 @@ function Craete() {
           <Select
             onChange={userSelectUs}
             options={usersOptions}
-            components={ani}
+            components={animationms}
             isMulti
             className="placeholder:font-neutral-500 text-blue-500 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
