@@ -4,7 +4,7 @@
 
 @layer components {
   .nov-item .active {
-    @apply bg-slate-50 ml-10 w-[320px] block rounded-l-3xl text-green-800     cursor-pointer  hover:text-black   shadow-yellow-500  hover:shadow-lg  hover:bg-red-100  font-bold 
+    @apply bg-slate-50  w-[310px] block rounded-l-3xl text-green-800     cursor-pointer  hover:text-black   shadow-yellow-500  hover:shadow-lg  hover:bg-red-100  font-bold 
     animate-borderGlow transition-all duration-300 hover:scale-105;
   }
 }
