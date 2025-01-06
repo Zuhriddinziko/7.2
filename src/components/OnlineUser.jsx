@@ -11,7 +11,7 @@ function OnlineUser() {
             return (
               <li
                 key={doc.id}
-                className="cursor-pointer w-[280px] h-[60px] text-black flex items-center rounded-lg p-2  hover:text-white bg-slate-50 shadow-yellow-500  shadow-lg  hover:bg-red-700  font-bold 
+                className="cursor-pointer w-[280px] h-[60px] text-teal-100 flex items-center rounded-lg p-2  hover:text-white bg-green-400 shadow-yellow-500  shadow-lg  hover:bg-red-700  font-bold 
                 animate-pulseGlow transition-all duration-300 hover:scale-105 "
               >
                 <div className="flex items-center gap-3">

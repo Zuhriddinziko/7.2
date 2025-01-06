@@ -18,17 +18,17 @@ function Navbar() {
           <Avatar user={user} />
         </div>
         <div>
-          <ul className="pl-10 flex flex-col gap-3 text-xl font-bold">
+          <ul className="pl-20 flex flex-col gap-3 text-xl font-bold">
             <li className="nov-item">
               <NavLink to={"/craete"}>
-                <span className="flex items-center gap-2 ml-5  pl-10 p-2">
+                <span className="flex items-center gap-2 ml-5   p-2">
                   <ImHappy2 /> Create
                 </span>
               </NavLink>
             </li>
             <li className="nov-item">
               <NavLink to={"/"} className=" ">
-                <span className="flex items-center gap-2 ml-5  pl-10 p-2              ">
+                <span className="flex items-center gap-2 ml-5   p-2              ">
                   <GrApps /> Home
                 </span>
               </NavLink>

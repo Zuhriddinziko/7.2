@@ -40,19 +40,6 @@ function Register() {
   const handleName = (e) => {
     setName(e.target.value);
   };
-  const hendle = () => {
-    if (error.displayName !== "") {
-      toast.error(error.displayName);
-    } else if (error.email !== "") {
-      toast.error(error.email);
-    } else if (error.password !== "") {
-      toast.error(error.password);
-    } else if (error.confirmPassword !== "") {
-      toast.error(error.displayName);
-    } else {
-      toast.isActive(`Walecome ${name}`);
-    }
-  };
 
   useEffect(() => {
     if (singUpData) {
@@ -131,9 +118,7 @@ function Register() {
         />
 
         <div className="mt-5 flex flex-col gap-2">
-          <button onClick={hendle} className=" btn btn-primary btn-block">
-            Submit
-          </button>
+          <button className=" btn btn-primary btn-block">Submit</button>
           <button type="button" className=" btn btn-secondary btn-block">
             Google
           </button>
