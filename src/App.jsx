@@ -23,7 +23,7 @@ import Craete from "./pages/Craete";
 
 function App() {
   const dispatch = useDispatch();
-  const { user } = useSelector((store) => store.user);
+  const { user, authReady } = useSelector((store) => store.user);
 
   const routes = createBrowserRouter([
     {
@@ -62,7 +62,7 @@ function App() {
       dispatch(authReadyAct());
     });
   });
-  return <RouterProvider router={routes} />;
+  return <>{authReady && <RouterProvider router={routes} />}</>;
 }
 
 export default App;
