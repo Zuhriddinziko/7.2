@@ -65,7 +65,7 @@ function Register() {
           password,
           confirmPassword
         );
-        toast.success(" Congratulations! You are with us.");
+        toast.success(`Hello ${name} Congratulations! You are with us.`);
       } else {
         setError((prev) => {
           return { ...prev, ...errors };
