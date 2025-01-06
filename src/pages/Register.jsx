@@ -70,7 +70,7 @@ function Register() {
         setError((prev) => {
           return { ...prev, ...errors };
         });
-        toast.error(errors);
+        toast.error(error);
       }
     }
   }, [singUpData]);

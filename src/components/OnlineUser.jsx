@@ -15,7 +15,9 @@ function OnlineUser() {
                 animate-pulseGlow transition-all duration-300 hover:scale-105 "
               >
                 <div className="flex items-center gap-3">
-                  <div className="avatar online">
+                  <div
+                    className={doc.online ? "avatar online" : "avatar offline"}
+                  >
                     <div className="mask mask-squircle h-12 w-12">
                       <img
                         src={doc.photoURL}
