@@ -1,3 +1,25 @@
+export function getFirebaseErrorMessage(errorCode) {
+  switch (errorCode) {
+    case "auth/invalid-email":
+      return "Invalid email address.";
+    case "auth/weak-password":
+      return "Password should be at least 6 characters.";
+    case "auth/email-already-in-use":
+      return "Email address is already in use.";
+    case "auth/user-not-found":
+      return "User not found.";
+    case "auth/wrong-password":
+      return "Incorrect password.";
+    case "auth/too-many-requests":
+      return "Too many requests. Please try again later.";
+    case "auth/operation-not-allowed":
+      return "This operation is not allowed. Please contact support.";
+    // Add more error codes and their corresponding messages here
+    default:
+      return "An unexpected error occurred.";
+  }
+}
+
 // utils.js
 export function validateSignupOrLoginData(actionData, isSignup = false) {
   if (!actionData) {

@@ -27,7 +27,7 @@ function Navbar() {
               </NavLink>
             </li>
             <li className="nov-item">
-              <NavLink to={"/"} className=" ">
+              <NavLink to={"/"}>
                 <span className="flex items-center gap-2 ml-5   p-2              ">
                   <GrApps /> Home
                 </span>

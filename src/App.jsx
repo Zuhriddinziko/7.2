@@ -20,6 +20,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/config";
 import { login, authReadyAct } from "./app/features/userSlice";
 import Craete from "./pages/Craete";
+import Progects from "./pages/Progects";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,10 @@ function App() {
           path: "/craete",
           element: <Craete />,
           action: CraeteAction,
+        },
+        {
+          path: "/progects",
+          element: <Progects />,
         },
       ],
     },

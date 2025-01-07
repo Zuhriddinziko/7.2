@@ -15,6 +15,7 @@ export const action = async ({ request }) => {
 
 function Login() {
   const { isPanding } = useSelector((store) => store.user);
+  console.log(isPanding);
   const { loginWithEmailAndPassword } = useLogin();
   const data = useActionData();
   useEffect(() => {
@@ -59,7 +60,7 @@ function Login() {
           )}
           {isPanding && (
             <button className=" btn btn-primary btn-block" disabled>
-              Submit
+              loading...
             </button>
           )}
         </div>

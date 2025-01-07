@@ -4,7 +4,12 @@
 
 @layer components {
   .nov-item .active {
-    @apply bg-slate-50  w-[270px] block rounded-l-3xl text-green-800     cursor-pointer  hover:text-black   shadow-yellow-500  hover:shadow-lg  hover:bg-red-100  font-bold 
-    animate-borderGlow transition-all duration-300 hover:scale-105;
+    @apply bg-slate-50 w-[270px] block rounded-l-3xl text-green-800 cursor-pointer hover:text-black shadow-yellow-500 hover:shadow-lg hover:bg-red-100 font-bold animate-borderGlow transition-all duration-300 hover:scale-105;
   }
+
+  .tip .active {
+    @apply cursor-pointer w-[280px] h-[60px] text-teal-100 flex items-center rounded-lg p-2 shadow-yellow-500 shadow-lg bg-red-700 font-bold animate-pulseGlow transition-all duration-300 hover:scale-105;
+  }
+
+
 }

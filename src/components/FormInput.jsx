@@ -1,5 +1,3 @@
-import { toast } from "react-toastify";
-
 function FormInput({
   type,
   label,
@@ -23,8 +21,6 @@ function FormInput({
         value={value}
         onChange={onChange}
       />
-
-      {errorText && toast.error(errorText)}
       {errorText && (
         <div className="label text-xs">
           <span className="labet-text-alt text-xs text-red-500">
