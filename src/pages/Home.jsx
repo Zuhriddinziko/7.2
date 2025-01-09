@@ -17,27 +17,35 @@ function Home() {
           </Link>
         </div>
       )}
-      <div className=" grid md:grid-cols-1 sm:grid-cols-1 grid-cols-2 gap-4 w-auto">
+      <div className=" grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 w-auto">
         {" "}
         {document &&
           document.map((doc) => {
+            // console.log(doc);
             return (
               <Link
                 to={"aboute"}
                 key={doc.id}
                 className="card drop-shadow-2xl bg-base-100 w-72 p-2 shadow-xl text-black "
               >
-                <div className="chat chat-start">
-                  <div className="chat-bubble chat-bubble-warning">Project</div>
+                <div className="flex flex-row justify-between items-center">
+                  <div className="chat chat-start">
+                    <div className="chat-bubble chat-bubble-warning">
+                      Project
+                    </div>
+                  </div>
+                  <div className="chat chat-end">
+                    <div className="chat-bubble chat-bubble-success">
+                      {/* {doc.dueTo} */}
+                    </div>
+                  </div>
                 </div>
                 <div className="card-body p-2">
                   <h2 className="card-title flex justify-center">{doc.name}</h2>
                   <p className="overflow-y-auto h-[150px]">{doc.description}</p>
                   {/* <p>{doc.dueTo}</p> */}
-                  {/* <b>{doc.selecttuz}</b> */}
-                  <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Buy Now</button>
-                  </div>
+                  <b>{doc.selecttuz}</b>
+                  <hr className=" drop-shadow-2xl" />
                 </div>
               </Link>
             );

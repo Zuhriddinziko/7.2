@@ -8,7 +8,7 @@ function OnlineUser() {
 
   // console.log(res);
   return (
-    <div className="w-[400px] md:w-[280px] sm:w-[180px] md:text-lg h-screen bg-stone-400  z-10 p-10  shadow-lg shadow-slate-600 tip">
+    <div className="w-[400px] h-screen bg-stone-400  z-10 p-10  shadow-lg shadow-slate-600 tip">
       <div className="bg-stone-300 w-[320px]  p-3 rounded-md flex flex-col gap-2 max-h-full overflow-y-auto">
         {document &&
           document.map((doc) => {
