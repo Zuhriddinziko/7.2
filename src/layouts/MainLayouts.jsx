@@ -12,7 +12,7 @@ function MainLayouts() {
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      className="flex justify-between text-yellow-100    bg-cover max-h-full overflow-y-auto"
+      className="flex justify-between text-yellow-100    bg-cover max-h-full "
     >
       <Navbar />
       <main className=" w-[700px]">

@@ -1,27 +1,36 @@
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "../firebase/config";
+import { auth, db } from "../firebase/config";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { doc, setDoc } from "firebase/firestore";
 
 export function useAuthWithGoogle() {
+  const [ispanding, setIspanding] = useState(false);
+  const [isConseled, setIsConseled] = useState(false);
+  // console.log(ispanding);
   const provider = new GoogleAuthProvider();
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-
-      // The signed-in user info.
-      const user = result.user;
-      // IdP data available using getAdditionalUserInfo(result)
-      // ...
-    })
-    .catch((error) => {
-      // Handle Errors here.
+  const googleAuth = async () => {
+    setIspanding(true);
+    try {
+      const res = await signInWithPopup(auth, provider);
+      const user = res.user;
+      if (!isConseled) {
+        await setDoc(doc(db, "users", user.uid), {
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+          id: user.uid,
+          online: true,
+        });
+      }
+    } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
-    });
+      toast.error(errorMessage);
+    }
+  };
+  useEffect(() => {
+    return () => setIsConseled(true);
+  }, []);
 
-  return {};
+  return { googleAuth, ispanding };
 }

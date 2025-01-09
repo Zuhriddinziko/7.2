@@ -1,4 +1,4 @@
-import { Form, useActionData } from "react-router-dom";
+import { Form, Link, useActionData } from "react-router-dom";
 import FormInput from "../components/FormInput";
 import Textarea from "../components/Textarea";
 import Select from "react-select";
@@ -8,11 +8,13 @@ import { Timestamp, serverTimestamp } from "firebase/firestore";
 import { useFirestore } from "../hooks/useFirestore";
 
 const animationms = makeAnimated();
+
 export async function action({ request }) {
   const form = await request.formData();
   const name = form.get("name");
   const description = form.get("description");
   const dueTo = Timestamp.fromDate(new Date(form.get("dueTo")));
+  // console.log(name);
   return { name, description, dueTo };
 }
 
@@ -38,10 +40,16 @@ function Craete() {
   const userSelectUs = (user) => {
     setSelectus(user);
   };
+
   const userSelectTuzType = (type) => {
-    setSelecttuz(type);
+    setSelecttuz(type.value);
   };
-  console.log(userActionDate);
+  // useEffect(() => {
+  //   if (userActionDate) {
+  //     console.log(Object.entries(userActionDate), selecttuz, selectus);
+  //   }
+  // }, [userActionDate]);
+  // console.log(selectus, selecttuz);
   useEffect(() => {
     if (userActionDate) {
       addDocument("Projects", {
@@ -57,7 +65,7 @@ function Craete() {
       <h2 className="text-black font-bold text-center text-4xl">
         You have write progect
       </h2>
-      <Form method="POST" className="flex flex-col gap-5">
+      <Form method="post" className="flex flex-col gap-5">
         <FormInput
           label={"Your progect name"}
           type={"text"}
@@ -96,12 +104,13 @@ function Craete() {
             className="placeholder:font-neutral-500 text-blue-500 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </label>
-        <button
+        <Link
+          to={"/"}
           className="btn btn-accent hover:text-black px-6 py-3 bg-black text-white font-bold rounded-lg shadow-lg 
            animate-pulseGlow transition-transform duration-300 hover:scale-105"
         >
           Add progects
-        </button>
+        </Link>
       </Form>
     </div>
   );

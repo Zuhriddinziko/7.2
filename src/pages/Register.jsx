@@ -5,6 +5,8 @@ import { useRegister } from "../hooks/useRegister";
 import { toast } from "react-toastify";
 import ima from ".././assets/image.jpg";
 import { validateSignupOrLoginData } from "../utils";
+import { useSelector } from "react-redux";
+import { useAuthWithGoogle } from "../hooks/useAuthWithGoogle";
 
 // action
 export const action = async ({ request }) => {
@@ -19,6 +21,10 @@ export const action = async ({ request }) => {
 };
 
 function Register() {
+  const { googleAuth, ispanding } = useAuthWithGoogle();
+  console.log(ispanding);
+  const { isPanding } = useSelector((store) => store.user);
+
   const [error, setError] = useState({
     displayName: "",
     email: "",
@@ -118,9 +124,21 @@ function Register() {
         />
 
         <div className="mt-5 flex flex-col gap-2">
-          <button className=" btn btn-primary btn-block">Submit</button>
-          <button type="button" className=" btn btn-secondary btn-block">
-            Google
+          {!isPanding && (
+            <button className=" btn btn-primary btn-block">Submit</button>
+          )}
+          {isPanding && (
+            <button className=" btn btn-primary btn-block" disabled>
+              loading...
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={googleAuth}
+            disabled={isPanding}
+            className=" btn btn-secondary btn-block"
+          >
+            {ispanding ? "Loading..." : "Google"}
           </button>
         </div>
         <div className=" mt-3">

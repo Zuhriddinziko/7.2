@@ -1,9 +1,13 @@
 import { Form, Link, useActionData } from "react-router-dom";
 import FormInput from "../components/FormInput";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import ima from ".././assets/image.jpg";
 import { useSelector } from "react-redux";
+import { validateSignupOrLoginData } from "../utils";
+import { toast } from "react-toastify";
+
+import { useAuthWithGoogle } from "../hooks/useAuthWithGoogle";
 
 // action
 export const action = async ({ request }) => {
@@ -15,15 +19,27 @@ export const action = async ({ request }) => {
 
 function Login() {
   const { isPanding } = useSelector((store) => store.user);
-  console.log(isPanding);
+  const { googleAuth, ispanding } = useAuthWithGoogle();
+  const [error, setError] = useState({
+    email: "",
+    password: "",
+  });
+  // console.log(isPanding);
   const { loginWithEmailAndPassword } = useLogin();
   const data = useActionData();
   useEffect(() => {
     if (data) {
-      if (data.email.length > 3 && data.password.length > 3) {
-        loginWithEmailAndPassword(data.email, data.password);
+      const { valid, errors } = validateSignupOrLoginData(data);
+
+      if (valid) {
+        const { email, password } = data;
+        loginWithEmailAndPassword(email, password);
+        toast.success(`Hello ${name} Congratulations! You are with us.`);
       } else {
-        alert("ma'lumotlarni to'liq kiriting");
+        setError((prev) => {
+          return { ...prev, ...errors };
+        });
+        toast.error(error);
       }
     }
   }, [data]);
@@ -47,14 +63,18 @@ function Login() {
           label="Email"
           placeholder="Email"
           name="email"
+          error={error.email && "input-error"}
+          errorText={error.email}
         />
         <FormInput
           type="Password"
           label="Password"
           placeholder="password"
           name="password"
+          error={error.password && "input-error"}
+          errorText={error.password}
         />
-        <div className="mt-5">
+        <div className="mt-5 flex flex-col gap-2">
           {!isPanding && (
             <button className=" btn btn-primary btn-block">Submit</button>
           )}
@@ -63,6 +83,14 @@ function Login() {
               loading...
             </button>
           )}
+          <button
+            type="button"
+            onClick={googleAuth}
+            disabled={isPanding}
+            className=" btn btn-secondary btn-block"
+          >
+            {ispanding ? "Loading..." : "Google"}
+          </button>
         </div>
         <div className="mt-3">
           <h3>

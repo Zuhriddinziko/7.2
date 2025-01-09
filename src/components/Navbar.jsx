@@ -12,7 +12,7 @@ function Navbar() {
   const { loguot } = useLoguot();
   const { user } = useSelector((stote) => stote.user);
   return (
-    <div className="flex flex-col w-[350px]  bg-stone-400 shadow-lg shadow-slate-600  text-slate-50 justify-between items-center ">
+    <div className="flex md:w-[280px] sm:w-[180px] md:text-lg flex-col w-[350px]  bg-stone-400 shadow-lg shadow-slate-600  text-slate-50 justify-between items-center ">
       <div className="flex flex-col gap-16">
         <div className="p-16">
           <Avatar user={user} />

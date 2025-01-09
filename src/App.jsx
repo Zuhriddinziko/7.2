@@ -8,11 +8,12 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ProtectedRouters from "./components/ProtectedRouters";
+import Users from "./pages/Users";
 
 // actions
 import { action as RegisterAction } from "./pages/Register";
 import { action as LoginAction } from "./pages/Login";
-import { action as CraeteAction } from "./pages/Craete";
+import { action as CreateAction } from "./pages/Craete";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -21,6 +22,7 @@ import { auth } from "./firebase/config";
 import { login, authReadyAct } from "./app/features/userSlice";
 import Craete from "./pages/Craete";
 import Progects from "./pages/Progects";
+import Aboute from "./pages/Aboute";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,11 +44,19 @@ function App() {
         {
           path: "/craete",
           element: <Craete />,
-          action: CraeteAction,
+          action: CreateAction,
         },
         {
           path: "/progects",
           element: <Progects />,
+        },
+        {
+          path: "/users/id",
+          element: <Users />,
+        },
+        {
+          path: "/aboute/id",
+          element: <Aboute />,
         },
       ],
     },

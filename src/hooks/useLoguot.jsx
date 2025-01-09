@@ -18,6 +18,7 @@ export function useLoguot() {
       })
       .catch((error) => {
         // An error happened.
+        toast.error(error.massage);
       });
   };
   return { loguot };
