@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useCollektion } from "../hooks/useCollektion";
-
 function Home() {
   const { document } = useCollektion("Projects");
   // console.log(document);
@@ -24,7 +23,7 @@ function Home() {
             // console.log(doc);
             return (
               <Link
-                to={"aboute"}
+                to={`/progects/${doc.id}`}
                 key={doc.id}
                 className="card drop-shadow-2xl bg-base-100 w-72 p-2 shadow-xl text-black "
               >

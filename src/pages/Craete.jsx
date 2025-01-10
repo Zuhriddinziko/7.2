@@ -6,6 +6,7 @@ import makeAnimated from "react-select/animated";
 import { useEffect, useState } from "react";
 import { Timestamp, serverTimestamp } from "firebase/firestore";
 import { useFirestore } from "../hooks/useFirestore";
+import { useCollektion } from "../hooks/useCollektion";
 
 const animationms = makeAnimated();
 
@@ -32,11 +33,19 @@ const progectType = [
 ];
 
 function Craete() {
+  const { document } = useCollektion("users");
+
   const { addDocument } = useFirestore();
   const userActionDate = useActionData();
   const [selectus, setSelectus] = useState([]);
   const [selecttuz, setSelecttuz] = useState([]);
-
+  useEffect(() => {
+    if (document) {
+      document.filter((ud) => {
+        return setSelectus(ud.displayName);
+      });
+    }
+  }, [document]);
   const userSelectUs = (user) => {
     setSelectus(user);
   };
@@ -54,8 +63,9 @@ function Craete() {
     if (userActionDate) {
       addDocument("Projects", {
         ...userActionDate,
+        comment: [],
         selecttuz,
-        selectus,
+        selectus: selectus.map((us) => us.value),
         createAd: serverTimestamp(new Date()),
       });
     }

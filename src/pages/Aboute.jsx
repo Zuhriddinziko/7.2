@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import useDocument from "../hooks/useDocument";
+
 function Aboute() {
-  const id = useParams();
+  const { id } = useParams();
   const { document } = useDocument("users", id);
   if (!document) {
     return <div className="loading"></div>;

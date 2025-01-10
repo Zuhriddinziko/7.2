@@ -107,6 +107,9 @@ function Register() {
           label="Password"
           placeholder="password"
           name="password"
+          className={
+            "w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          }
           value={password}
           onChange={handlePasswordChange}
           error={error.password && "input-error"}
@@ -114,6 +117,9 @@ function Register() {
         />
         <FormInput
           type="Password"
+          className={
+            "w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          }
           label="Repaet password"
           placeholder="password validation"
           name="password2"
