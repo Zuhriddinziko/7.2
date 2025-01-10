@@ -9,7 +9,7 @@ function FormInput({
   errorText,
   className,
 }) {
-  console.log(className);
+  // console.log(className);
   return (
     <label className="form-control w-full mb-2">
       <div className="label">

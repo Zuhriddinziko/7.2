@@ -35,20 +35,22 @@ const progectType = [
 function Craete() {
   const { document } = useCollektion("users");
 
-  const { addDocument } = useFirestore();
+  // const { addDocument } = useFirestore();
   const userActionDate = useActionData();
   const [selectus, setSelectus] = useState([]);
   const [selecttuz, setSelecttuz] = useState([]);
   useEffect(() => {
     if (document) {
-      document.filter((ud) => {
+      document.map((ud) => {
         return setSelectus(ud.displayName);
       });
     }
   }, [document]);
+  console.log(selectus);
   const userSelectUs = (user) => {
     setSelectus(user);
   };
+  const { addDocument, isPanding, error, success } = useFirestore();
 
   const userSelectTuzType = (type) => {
     setSelecttuz(type.value);
