@@ -36,6 +36,7 @@ export function validateSignupOrLoginData(actionData, isSignup = false) {
     projectType,
     name,
   } = actionData;
+  // console.log(actionData.name);
   const errors = {};
 
   // Signup-specific validation
@@ -43,9 +44,9 @@ export function validateSignupOrLoginData(actionData, isSignup = false) {
     if (!displayName || displayName.trim().length < 3) {
       errors.displayName = "Display name must be at least 3 characters long.";
     }
-    if (!name || name.trim().length < 3) {
-      errors.name = "Display name must be at least 3 characters long.";
-    }
+    // if (!name || name.trim().length < 3) {
+    //   errors.name = "Display name must be at least 3 characters long.";
+    // }
     if (!description || description.trim().length < 3) {
       errors.description = "Display name must be at least 3 characters long.";
     }

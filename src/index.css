@@ -11,5 +11,16 @@
     @apply cursor-pointer w-[280px] h-[60px] text-teal-100 flex items-center rounded-lg p-2 shadow-yellow-500 shadow-lg bg-red-700 font-bold animate-pulseGlow transition-all duration-300 hover:scale-105;
   }
 
+  .dark-mode {
+    @apply bg-slate-900 text-white;
+
+  }
+
+  .dark-mode h2 {
+    @apply text-green-500;
+
+  }
+
+
 
 }

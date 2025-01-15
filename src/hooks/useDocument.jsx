@@ -10,7 +10,7 @@ function useDocument(collectionName, id) {
       setDocument({ id: doc.id, ...doc.data() });
     });
     return () => unsub();
-  }, [collectionName]);
+  }, [collectionName, id]);
 
   return { document };
 }

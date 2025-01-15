@@ -8,7 +8,7 @@ import { validateSignupOrLoginData } from "../utils";
 
 export function useLogin() {
   const dispatch = useDispatch();
-  const loginWithEmailAndPassword = async (email, password, displayName) => {
+  const loginWithEmailAndPassword = async (email, password) => {
     dispatch(setIsPanding(true));
 
     try {

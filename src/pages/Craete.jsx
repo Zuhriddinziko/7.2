@@ -7,24 +7,11 @@ import { useEffect, useState } from "react";
 import { Timestamp, serverTimestamp } from "firebase/firestore";
 import { useFirestore } from "../hooks/useFirestore";
 import { useCollektion } from "../hooks/useCollektion";
+import { Navigate } from "react-router-dom";
 
 const animationms = makeAnimated();
 
-export async function action({ request }) {
-  const form = await request.formData();
-  const name = form.get("name");
-  const description = form.get("description");
-  const dueTo = Timestamp.fromDate(new Date(form.get("dueTo")));
-  // console.log(name);
-  return { name, description, dueTo };
-}
-
-const usersOptions = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
+// console.log(name);
 const progectType = [
   { value: "smm", label: "SMM" },
   { value: "frontent", label: "Frontent" },
@@ -32,42 +19,47 @@ const progectType = [
   { value: "marketing", label: "Marketing" },
 ];
 
+export async function action({ request }) {
+  const form = await request.formData();
+  const name = form.get("name");
+  const description = form.get("description");
+  const dueTo = Timestamp.fromDate(new Date(form.get("dueTo")));
+  return { name, description, dueTo };
+}
 function Craete() {
   const { document } = useCollektion("users");
-
-  // const { addDocument } = useFirestore();
+  const { addDocument } = useFirestore();
   const userActionDate = useActionData();
+  console.log(userActionDate);
   const [selectus, setSelectus] = useState([]);
   const [selecttuz, setSelecttuz] = useState([]);
+  const [users, setUsers] = useState([]);
+  // const navigate = Navigate();
+  // const navi = () => {
+  //   navigate("/");
+  // };
   useEffect(() => {
-    if (document) {
-      document.map((ud) => {
-        return setSelectus(ud.displayName);
-      });
-    }
+    setUsers(
+      document?.map((doc) => {
+        return { value: { ...doc }, label: doc.displayName };
+      })
+    );
   }, [document]);
-  console.log(selectus);
-  const userSelectUs = (user) => {
-    setSelectus(user);
+  const userSelectUs = (users) => {
+    setSelectus(users);
   };
-  const { addDocument, isPanding, error, success } = useFirestore();
+  // const { addDocument, isPanding } = useFirestore();
 
   const userSelectTuzType = (type) => {
     setSelecttuz(type.value);
   };
-  // useEffect(() => {
-  //   if (userActionDate) {
-  //     console.log(Object.entries(userActionDate), selecttuz, selectus);
-  //   }
-  // }, [userActionDate]);
-  // console.log(selectus, selecttuz);
   useEffect(() => {
     if (userActionDate) {
-      addDocument("Projects", {
+      addDocument("projects", {
         ...userActionDate,
         comment: [],
         selecttuz,
-        selectus: selectus.map((us) => us.value),
+        selectus: selectus.map((us) => us.label),
         createAd: serverTimestamp(new Date()),
       });
     }
@@ -82,7 +74,7 @@ function Craete() {
           label={"Your progect name"}
           type={"text"}
           placeholder={"write name"}
-          name={"name"}
+          name="name"
         />
         <Textarea label={"Progect description"} name={"description"} />
         <FormInput
@@ -100,6 +92,12 @@ function Craete() {
             onChange={userSelectTuzType}
             options={progectType}
             components={animationms}
+            styles={{
+              option: (provided) => ({
+                ...provided,
+                color: "black", // Set option text color to black
+              }),
+            }}
             className="placeholder:from-neutral-500 text-blue-500 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </label>
@@ -110,19 +108,26 @@ function Craete() {
           </div>
           <Select
             onChange={userSelectUs}
-            options={usersOptions}
+            options={users}
             components={animationms}
             isMulti
-            className="placeholder:font-neutral-500 text-blue-500 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            styles={{
+              option: (provided) => ({
+                ...provided,
+                color: "black", // Set option text color to black
+              }),
+            }}
+            className="placeholder:font-neutral-500 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 "
           />
         </label>
-        <Link
-          to={"/"}
+
+        <button
+          // onClick={navi}
           className="btn btn-accent hover:text-black px-6 py-3 bg-black text-white font-bold rounded-lg shadow-lg 
            animate-pulseGlow transition-transform duration-300 hover:scale-105"
         >
           Add progects
-        </Link>
+        </button>
       </Form>
     </div>
   );

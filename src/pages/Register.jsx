@@ -16,13 +16,13 @@ export const action = async ({ request }) => {
   const password = form.get("password");
   const confirmPassword = form.get("password2");
 
-  // console.log(displayName, email, password);
+  // console.log(displayName, email, password, confirmPassword);
   return { displayName, email, password, confirmPassword };
 };
 
 function Register() {
   const { googleAuth, ispanding } = useAuthWithGoogle();
-  console.log(ispanding);
+  // console.log(ispanding);
   const { isPanding } = useSelector((store) => store.user);
 
   const [error, setError] = useState({
@@ -33,6 +33,7 @@ function Register() {
   });
   const { registerWithEmailAndPassword } = useRegister();
   const singUpData = useActionData();
+  // console.log(singUpData);
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -50,20 +51,20 @@ function Register() {
   useEffect(() => {
     if (singUpData) {
       const { valid, errors } = validateSignupOrLoginData(singUpData, true);
-      if (valid) {
-        const { displayName, email, password, confirmPassword } = singUpData;
-        registerWithEmailAndPassword(
-          displayName,
-          email,
-          password,
-          confirmPassword
-        );
+      console.log(valid);
+
+      if (!valid) {
+        const { displayName, email, password } = singUpData;
+        // console.log(valid);
+        registerWithEmailAndPassword(displayName, email, password);
         toast.success(`Hello ${name} Congratulations! You are with us.`);
       } else {
+        // console.log(errors);
+
         setError((prev) => {
           return { ...prev, ...errors };
         });
-        toast.error(error);
+        toast.error(errors);
       }
     }
   }, [singUpData]);

@@ -27,4 +27,7 @@ export default {
     },
   },
   plugins: [daisyui],
+  daisyui: {
+    themes: ["winter", "dark", "cupcake"],
+  },
 };

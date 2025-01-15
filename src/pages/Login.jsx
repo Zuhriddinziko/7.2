@@ -8,6 +8,7 @@ import { validateSignupOrLoginData } from "../utils";
 import { toast } from "react-toastify";
 
 import { useAuthWithGoogle } from "../hooks/useAuthWithGoogle";
+import { useCollektion } from "../hooks/useCollektion";
 
 // action
 export const action = async ({ request }) => {
@@ -34,7 +35,7 @@ function Login() {
       if (valid) {
         const { email, password } = data;
         loginWithEmailAndPassword(email, password);
-        toast.success(`Hello ${name} Congratulations! You are with us.`);
+        toast.success(`Hello  Congratulations! You are with us.`);
       } else {
         setError((prev) => {
           return { ...prev, ...errors };
@@ -89,7 +90,7 @@ function Login() {
             disabled={isPanding}
             className=" btn btn-secondary btn-block"
           >
-            {ispanding ? "Loading..." : "Google"}
+            {isPanding ? "Loading..." : "Google"}
           </button>
         </div>
         <div className="mt-3">

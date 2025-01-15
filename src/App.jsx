@@ -53,7 +53,6 @@ function App() {
           path: "/craete",
           element: <Craete />,
           action: CreateAction,
-          errorElement: <PageNotFound />,
         },
         {
           path: "/progects/:id",
@@ -61,7 +60,7 @@ function App() {
           errorElement: <PageNotFound />,
         },
         {
-          path: "/users/id",
+          path: "/users/:id",
           element: <Users />,
           errorElement: <PageNotFound />,
         },
