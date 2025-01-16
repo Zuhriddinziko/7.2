@@ -31,7 +31,7 @@ function Aboute() {
     //   comment: [...document.comment, massage],
     // },
     // id
-    console.log(massage);
+    // console.log(massage.content);
     setContent("");
   };
   return (
