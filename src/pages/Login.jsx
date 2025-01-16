@@ -87,10 +87,10 @@ function Login() {
           <button
             type="button"
             onClick={googleAuth}
-            disabled={isPanding}
+            disabled={ispanding}
             className=" btn btn-secondary btn-block"
           >
-            {isPanding ? "Loading..." : "Google"}
+            {ispanding ? "Loading..." : "Google"}
           </button>
         </div>
         <div className="mt-3">

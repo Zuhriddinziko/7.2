@@ -7,8 +7,10 @@ import { CgMoveRight } from "react-icons/cg";
 
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { useTheme } from "../hooks/useTheme";
 
 function Navbar() {
+  const { changeTheme, theme } = useTheme();
   const { loguot } = useLoguot();
   const { user } = useSelector((stote) => stote.user);
   // const dispatch = useDispatch();
@@ -40,10 +42,11 @@ function Navbar() {
         </div>
       </div>
 
-      <div className="pb-9">
+      <div className="pb-9 flex flex-col gap-5">
         <label className="grid cursor-pointer place-items-center">
           <input
-            // onChange={changeTheme}
+            onChange={changeTheme}
+            // defaultChecked={false}
             type="checkbox"
             value="synthwave"
             className="toggle theme-controller bg-base-content col-span-2 col-start-1 row-start-1"

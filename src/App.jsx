@@ -29,8 +29,11 @@ import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/config";
 import { login, authReadyAct } from "./app/features/userSlice";
+import { useCollektion } from "./hooks/useCollektion";
 
 function App() {
+  const { document } = useCollektion("users");
+
   const dispatch = useDispatch();
   const { user, authReady } = useSelector((store) => store.user);
 
@@ -46,7 +49,7 @@ function App() {
       children: [
         {
           index: true,
-          element: <Home />,
+          element: <Home user={document} />,
           errorElement: <PageNotFound />,
         },
         {
@@ -57,7 +60,6 @@ function App() {
         {
           path: "/progects/:id",
           element: <Progects />,
-          errorElement: <PageNotFound />,
         },
         {
           path: "/users/:id",
@@ -65,7 +67,7 @@ function App() {
           errorElement: <PageNotFound />,
         },
         {
-          path: "/aboute",
+          path: "/aboute/:id",
           element: <Aboute />,
           errorElement: <PageNotFound />,
         },

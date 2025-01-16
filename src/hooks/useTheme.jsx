@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 
-const themeLokostori = () => {
+const themeFromLocalStorage = () => {
   return localStorage.getItem("theme") || "winter";
 };
 
 export function useTheme() {
-  const [theme, setTheme] = useState(themeLokostori());
-
+  const [theme, setTheme] = useState(themeFromLocalStorage());
+  console.log(theme);
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-  }, localStorage.setItem[("theme", theme)]);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
   const changeTheme = () => {
     setTheme((prev) => {
       prev == "winter" ? "dracula" : "winter";

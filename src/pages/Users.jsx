@@ -17,7 +17,7 @@ function Users() {
 
   const [selects, setSelects] = useState(id);
   const { document } = useDocument("users", selects);
-
+  // console.log(document);
   const [pushs, setPushs] = useState(false);
 
   const pushImahe = (e) => {

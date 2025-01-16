@@ -22,7 +22,6 @@ export const action = async ({ request }) => {
 
 function Register() {
   const { googleAuth, ispanding } = useAuthWithGoogle();
-  // console.log(ispanding);
   const { isPanding } = useSelector((store) => store.user);
 
   const [error, setError] = useState({
@@ -51,7 +50,7 @@ function Register() {
   useEffect(() => {
     if (singUpData) {
       const { valid, errors } = validateSignupOrLoginData(singUpData, true);
-      console.log(valid);
+      // console.log(valid);
 
       if (!valid) {
         const { displayName, email, password } = singUpData;
@@ -142,7 +141,7 @@ function Register() {
           <button
             type="button"
             onClick={googleAuth}
-            disabled={isPanding}
+            disabled={ispanding}
             className=" btn btn-secondary btn-block"
           >
             {ispanding ? "Loading..." : "Google"}

@@ -1,58 +1,83 @@
+import { BiSolidSend } from "react-icons/bi";
+import { useFirestore } from "../hooks/useFirestore";
 import { useParams } from "react-router-dom";
 import useDocument from "../hooks/useDocument";
+import { useState } from "react";
+import { Timestamp } from "firebase/firestore";
+import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 function Aboute() {
   const { id } = useParams();
-  const { document } = useDocument("users", id);
-  if (!document) {
-    return <div className="loading"></div>;
-  }
-
+  const { user } = useSelector((store) => store.user);
+  const [content, setContent] = useState("");
+  const { upDataProject } = useFirestore("Progects");
+  const { document } = useDocument("Progects", id);
+  console.log(document);
+  const hanleSubmit = async (e) => {
+    e.preventDefault();
+    const massage = {
+      id: uuidv4(),
+      content,
+      craetAd: Timestamp.fromDate(new Date()),
+      ower: {
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        id: user.uid,
+      },
+    };
+    // await upDataProject();
+    // {
+    //   comment: [...document.comment, massage],
+    // },
+    // id
+    console.log(massage);
+    setContent("");
+  };
   return (
-    <div className="grid grid-cols-2 gap-5">
-      <div>
-        <p className="bg-slate-100 p-5">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum soluta
-          vel accusamus nam quisquam temporibus velit ea quos esse harum dicta
-          exercitationem, nihil quod incidunt quae, dolorum accusantium itaque?
-          Pariatur consequuntur excepturi, obcaecati unde sapiente rem in
-          laudantium necessitatibus vero nemo sunt! Necessitatibus laudantium
-          quam velit deleniti, dicta id facere!
+    <div className="flex flex-row gap-3 mt-8">
+      <div className="w-1/2 rounded-md bg-white ">
+        <p className=" text-black p-4">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
+          recusandae, delectus temporibus sunt et corrupti beatae alias laborum
+          a. Quia aliquid culpa, ratione hic possimus consectetur voluptas
+          commodi laborum saepe velit, molestiae enim perspiciatis omnis atque
+          facilis inventore deserunt, dolores deleniti accusamus esse iure quo.
+          Iste odit nemo nobis corrupti.
         </p>
       </div>
-      <div>
-        <div className="chat chat-start">
-          <div className="chat-image avatar">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
+      <div className="w-1/2">
+        <form onSubmit={hanleSubmit} className="flex flex-col  ">
+          <div className="chat chat-end">
+            <div className="chat-image avatar">
+              <div className="w-10 rounded-full">
+                <img
+                  alt="Tailwind CSS chat bubble component"
+                  src={user.photoURL}
+                />
+              </div>
             </div>
-          </div>
-          <div className="chat-header">
-            Obi-Wan Kenobi
-            <time className="text-xs opacity-50">12:45</time>
-          </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
-          <div className="chat-footer opacity-50">Delivered</div>
-        </div>
-        <div className="chat chat-end">
-          <div className="chat-image avatar">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
+            <div className="chat-header">
+              Obi-Wan Kenobi
+              <time className="text-xs opacity-50">12:45</time>
             </div>
+            <div className="chat-bubble">{content}</div>
+            <div className="chat-footer opacity-50">Delivered</div>
           </div>
-          <div className="chat-header">
-            Anakin
-            <time className="text-xs opacity-50">12:46</time>
-          </div>
-          <div className="chat-bubble">I hate you!</div>
-          <div className="chat-footer opacity-50">Seen at 12:46</div>
-        </div>
+
+          <textarea
+            className="w-[100%] rounded-t-md p-2 text-black"
+            onChange={(e) => setContent(e.target.value)}
+            value={content}
+          ></textarea>
+          <button
+            // type="button"
+            className="btn hover:bg-amber-500 hover:border-none btn-block rounded-b-md -mt-2 rounded-none btn-primary text-black"
+          >
+            <b> Send </b>
+            <BiSolidSend />
+          </button>
+        </form>
       </div>
     </div>
   );

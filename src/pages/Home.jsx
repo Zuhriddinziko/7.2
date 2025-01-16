@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { useCollektion } from "../hooks/useCollektion";
+import { useState } from "react";
 function Home() {
   const { document } = useCollektion("Projects");
-  // console.log(document);
 
   return (
     <div className="  gap-4 w-auto max-h-screen overflow-y-auto p-5">
@@ -23,7 +23,7 @@ function Home() {
             // console.log(doc);
             return (
               <Link
-                to={`/progects/${doc.id}`}
+                to={`/aboute/${doc.id}`}
                 key={doc.id}
                 className="card drop-shadow-2xl bg-base-100 w-72 p-2 shadow-xl text-black "
               >
@@ -45,6 +45,7 @@ function Home() {
                   {/* <p>{doc.dueTo}</p> */}
                   <b>{doc.selecttuz}</b>
                   <hr className=" drop-shadow-2xl" />
+                  <div></div>
                 </div>
               </Link>
             );

@@ -2,33 +2,30 @@ import { useParams } from "react-router-dom";
 import useDocument from "../hooks/useDocument";
 import { BiSolidSend } from "react-icons/bi";
 import Textarea from "../components/Textarea";
+import { useCollektion } from "../hooks/useCollektion";
 
 function Progects() {
   const { id } = useParams();
-  const { document } = useDocument("users", id);
+  const { document } = useCollektion("Progects");
+  console.log(document);
 
   if (!document) {
     return <span className="loading loading-spinner text-info"></span>;
+  } else {
+    console.log(document);
   }
 
   return (
     <div className="grid grid-cols-2 gap-5 p-5">
       <div>
-        <p className="bg-slate-100 p-5 text-black rounded-md">
-          {id}
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum soluta
-          vel accusamus nam quisquam temporibus velit ea quos esse harum dicta
-          exercitationem, nihil quod incidunt quae, dolorum accusantium itaque?
-          Pariatur consequuntur excepturi, obcaecati unde sapiente rem in
-          laudantium necessitatibus vero nemo sunt! Necessitatibus laudantium
-          quam velit deleniti, dicta id facere!
-        </p>
+        <h1>{document.description}</h1>
+        <p className="bg-slate-100 p-5 text-black rounded-md"></p>
       </div>
       <div className=" flex flex-col justify-between">
-        <div>{document?.comment.length == 0 ? "No Comment" : ""}</div>
-        <form>
+        {/* <div>{document?.comment.length == 0 ? "No Comment" : ""}</div> */}
+        <form className="flex flex-col gap-1">
           <div className="label">
-            <span className="label-text"> Message: </span>
+            <span className="label-text text-white"> Message: </span>
           </div>
           <Textarea />
           <button

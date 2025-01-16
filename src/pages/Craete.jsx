@@ -30,7 +30,7 @@ function Craete() {
   const { document } = useCollektion("users");
   const { addDocument } = useFirestore();
   const userActionDate = useActionData();
-  console.log(userActionDate);
+  // console.log(userActionDate);
   const [selectus, setSelectus] = useState([]);
   const [selecttuz, setSelecttuz] = useState([]);
   const [users, setUsers] = useState([]);
@@ -55,7 +55,7 @@ function Craete() {
   };
   useEffect(() => {
     if (userActionDate) {
-      addDocument("projects", {
+      addDocument("Projects", {
         ...userActionDate,
         comment: [],
         selecttuz,
